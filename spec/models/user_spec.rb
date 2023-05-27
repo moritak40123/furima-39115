@@ -4,14 +4,14 @@ RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
-  
+
   describe 'ユーザー新規登録' do
-    context "新規登録できるとき" do
+    context '新規登録できるとき' do
       it 'nicknameとemail、password、password_confirmation、last_name、first_name、last_name_kana、first_name_kana、birthdayが存在すれば登録できる' do
         expect(@user).to be_valid
       end
     end
-    context "新規登録できないとき" do
+    context '新規登録できないとき' do
       it 'nicknameが空では登録できない' do
         @user.nickname = ''
         @user.valid?
@@ -38,24 +38,24 @@ RSpec.describe User, type: :model do
         user2 = FactoryBot.build(:user)
         user2.email = @user.email
         user2.valid?
-        expect(user2.errors.full_messages).to include("Email has already been taken")
+        expect(user2.errors.full_messages).to include('Email has already been taken')
       end
       it 'emailは@を含まないと登録できない' do
         @user.email = 'aaaaaaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it 'passwordが5文字以下では登録できない' do
         @user.password = '12345'
         @user.password_confirmation = '12345'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'passwordが129文字以上では登録できない' do
         @user.password = Faker::Internet.password(min_length: 129)
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
+        expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
       end
       it 'last_nameが空では登録できない' do
         @user.last_name = ''
@@ -84,5 +84,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
 end
