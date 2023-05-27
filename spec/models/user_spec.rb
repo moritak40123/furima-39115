@@ -7,7 +7,8 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できるとき' do
-      it 'nicknameとemail、password、password_confirmation、last_name、first_name、last_name_kana、first_name_kana、birthdayが存在すれば登録できる' do
+      it 'nicknameとemail、password、password_confirmation、last_name、
+      first_name、last_name_kana、first_name_kana、birthdayが存在すれば登録できる' do
         expect(@user).to be_valid
       end
     end
@@ -83,7 +84,7 @@ RSpec.describe User, type: :model do
       it '姓（全角）に半角文字が含まれていると登録できない' do
         @user.last_name = 'ｱｱｱｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name には全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('Last name には全角文字を使用してください')
       end
       it '名（全角）が空では登録できない' do
         @user.first_name = ''
@@ -93,7 +94,7 @@ RSpec.describe User, type: :model do
       it '名（全角）に半角文字が含まれていると登録できない' do
         @user.first_name = 'ｱｱｱｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name には全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('First name には全角文字を使用してください')
       end
       it '姓（カナ）が空では登録できない' do
         @user.last_name_kana = ''
@@ -103,7 +104,7 @@ RSpec.describe User, type: :model do
       it '姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
         @user.last_name_kana = 'やまだ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kana には全角カナを使用してください")
+        expect(@user.errors.full_messages).to include('Last name kana には全角カナを使用してください')
       end
       it '名（カナ）が空では登録できない' do
         @user.first_name_kana = ''
@@ -113,7 +114,7 @@ RSpec.describe User, type: :model do
       it '名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
         @user.first_name_kana = 'たろう'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana には全角カナを使用してください")
+        expect(@user.errors.full_messages).to include('First name kana には全角カナを使用してください')
       end
       it 'birthdayが空では登録できない' do
         @user.birthday = ''
