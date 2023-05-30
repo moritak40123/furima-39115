@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :item do
-    
     item_name          { Faker::Name.initials(number: 2) }
-    price              { Faker::Commerce.price(range: 300..9999999, as_string: true) }
+    price              { Faker::Commerce.price(range: 300..9_999_999, as_string: true) }
     delivery_charge_id { Faker::Number.between(from: 2, to: 3) }
-    profile            {Faker::Lorem.sentence}
+    profile            { Faker::Lorem.sentence }
     category_id        { Faker::Number.between(from: 2, to: 11) }
     condition_id       { Faker::Number.between(from: 2, to: 7) }
     prefecture_id      { Faker::Number.between(from: 2, to: 48) }

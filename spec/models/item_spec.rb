@@ -86,14 +86,13 @@ RSpec.describe Item, type: :model do
       it 'priceが300から9,999,999の半角数字でないと投稿できない' do
         @item.price = 10
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price には300から9,999,999の半角数値で入力してください")
+        expect(@item.errors.full_messages).to include('Price には300から9,999,999の半角数値で入力してください')
       end
       it 'userが紐付いていなければ投稿できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
-
 end
