@@ -7,9 +7,7 @@ class Item < ApplicationRecord
   belongs_to :ship_date
 
   validates :item_name, presence: true
-  with_options presence: true, format: { with: /\A[1-9][0-9]{2,6}\z/, message: 'には300から9,999,999の半角数値で入力してください' } do
-    validates :price
-  end
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'には300から9,999,999の半角数値で入力してください' }
   validates :delivery_charge_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :profile, presence: true
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
