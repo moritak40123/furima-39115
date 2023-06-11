@@ -20,6 +20,11 @@ RSpec.describe OrderAddress, type: :model do
     end
 
     context '内容に問題がある場合' do
+      it 'tokenが空では購入できない' do
+        @order_address.token = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
       it 'post_codeが空では購入できない' do
         @order_address.post_code = ''
         @order_address.valid?
@@ -28,7 +33,7 @@ RSpec.describe OrderAddress, type: :model do
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと購入できない' do
         @order_address.post_code = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('にはハイフン(-)を入れて半角数値で入力してください')
+        expect(@order_address.errors.full_messages).to include("にはハイフン(-)を入れて半角数値で入力してください")
       end
       it 'prefectureが空では購入できない' do
         @order_address.prefecture_id = ''
