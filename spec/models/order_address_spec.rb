@@ -6,6 +6,7 @@ RSpec.describe OrderAddress, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
+      sleep 0.1
     end
 
     context '内容に問題ない場合' do
@@ -64,8 +65,13 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone には半角数値で入力してください')
       end
-      it 'phoneが10桁か11桁でないと購入できない' do
+      it 'phoneが9桁以下だと購入できない' do
         @order_address.phone = '11111'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone には半角数値で入力してください')
+      end
+      it 'phoneが12桁以上だと購入できない' do
+        @order_address.phone = '111111111111'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone には半角数値で入力してください')
       end

@@ -8,7 +8,7 @@ class OrderAddress
     validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'にはハイフン(-)を入れて半角数値で入力してください' }
     validates :city
     validates :address
-    validates :phone, format: { with: /[0-9]{10,11}/, message: 'には半角数値で入力してください' }
+    validates :phone, format: { with: /\A[0-9]{10,11}\z/, message: 'には半角数値で入力してください' }
     validates :token
   end
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
