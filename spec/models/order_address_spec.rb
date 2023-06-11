@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
-
   describe '購入の保存' do
     before do
       user = FactoryBot.create(:user)
@@ -33,7 +32,7 @@ RSpec.describe OrderAddress, type: :model do
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと購入できない' do
         @order_address.post_code = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("にはハイフン(-)を入れて半角数値で入力してください")
+        expect(@order_address.errors.full_messages).to include('にはハイフン(-)を入れて半角数値で入力してください')
       end
       it 'prefectureが空では購入できない' do
         @order_address.prefecture_id = ''
@@ -63,12 +62,12 @@ RSpec.describe OrderAddress, type: :model do
       it 'phoneが半角数字以外が含まれると購入できない' do
         @order_address.phone = '090-1111-1111'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("には半角数値で入力してください")
+        expect(@order_address.errors.full_messages).to include('には半角数値で入力してください')
       end
       it 'phoneが10桁か11桁でないと購入できない' do
         @order_address.phone = '11111'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("には半角数値で入力してください")
+        expect(@order_address.errors.full_messages).to include('には半角数値で入力してください')
       end
       it 'userが紐付いていないと購入できない' do
         @order_address.user_id = nil
