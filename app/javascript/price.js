@@ -6,7 +6,7 @@ function post (){
     const commissionValue = Math.floor(priceValue * 0.1);
     commission.innerHTML = commissionValue;
     const profit = document.getElementById("profit");
-    const profitValue = Math.floor(priceValue * 0.9);
+    const profitValue = Math.floor(priceValue - commissionValue);
     profit.innerHTML = profitValue;
   });
 };
